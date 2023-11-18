@@ -3,6 +3,7 @@ package com.fudgelate.controller;
 import com.fudgelate.exception.RecordNotFoundException;
 
 import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
@@ -28,17 +29,15 @@ public class ApplicationControllerAdvice {
                             .reduce("", (acc, error) -> acc + error + "\n"))
                     .build();
         }
-    }
 
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
-        if (ex != null && ex.getRequiredType() != null) {
-            String type = ex.getRequiredType().getName();
-            String[] typeParts = type.split("\\.");
-            String typeName = typeParts[typeParts.length - 1];
-            return ex.getName() + " should be of type " + typeName;
+        @Provider
+        public static class BadRequestExceptionMapper implements ExceptionMapper<BadRequestException> {
+            @Override
+            public Response toResponse(BadRequestException ex) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Argument type not valid")
+                        .build();
+            }
         }
-        return "Argument type not valid";
     }
 }

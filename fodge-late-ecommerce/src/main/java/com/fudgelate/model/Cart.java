@@ -8,18 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Cart {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,4 +19,27 @@ public class Cart {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items;
 
+    public Cart() {
+    }
+
+    public Cart(Long id, List<CartItem> items) {
+        this.id = id;
+        this.items = items;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<CartItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CartItem> items) {
+        this.items = items;
+    }
 }
