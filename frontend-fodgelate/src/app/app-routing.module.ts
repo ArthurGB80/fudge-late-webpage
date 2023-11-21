@@ -1,15 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { AccountComponent } from './account/account.component';
+import { CartComponent } from './cart/cart.component';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
+import { InfoComponent } from './info/info.component';
 import { ProductListComponent } from './products/components/product-list/product-list.component';
-import { ProductDetailComponent } from './products/containers/product-detail/product-detail.component';
+import { ProductSearchComponent } from './products/containers/product-search/product-search.component';
 
 const routes: Routes = [
-  { path: '', component: ProductListComponent },
-  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'products', component: ProductListComponent },
+  { path: 'search', component: ProductSearchComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'info', component: InfoComponent },
+  { path: 'account', component: AccountComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to home page by default
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

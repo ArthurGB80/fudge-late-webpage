@@ -1,0 +1,34 @@
+.mat-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.logo img {
+  height: 70px;
+  width: auto;
+}
+
+button {
+  margin: 0 20px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.icon-buttons {
+  display: flex;
+  margin-left: 50px;
+}
+
+.icon-buttons button {
+  margin: 0 5px;
+}
