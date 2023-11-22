@@ -1,32 +1,63 @@
+@media screen and (max-width: 600px) {
+  .menu-items {
+    display: none;
+  }
+
+  .mat-toolbar {
+    justify-content: flex-start;
+    height: 100px;
+  }
+
+  .logo {
+    margin-right: 15px;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  button {
+    margin: 0 5px;
+    font-size: 12px;
+  }
+
+  .icon-buttons {
+    margin-left: 20px;
+  }
+}
+
 .mat-toolbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 50;
   height: 80px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  margin-right: 50px;
+  margin-right: 35px;
 }
 
 .logo img {
-  height: 70px;
+  height: 60px;
   width: auto;
 }
 
 button {
-  margin: 0 20px;
+  margin: 0 10px;
   background-color: transparent;
   border: none;
   box-shadow: none;
+  font-size: 13px;
 }
 
 .icon-buttons {
   display: flex;
   margin-left: 50px;
+  align-items: center;
+  margin-top: 5px;
 }
 
 .icon-buttons button {

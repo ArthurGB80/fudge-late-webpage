@@ -8,7 +8,7 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { HeaderComponent } from './components/header/header.component';
 import { CategoryPipe } from './pipes/category.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     CarouselComponent,
   ],
-  imports: [CommonModule, MatToolbarModule, MatIconModule,NgbModule],
+  imports: [CommonModule, MatToolbarModule, MatIconModule, NgbModule, MatMenuModule],
   exports: [HeaderComponent,CarouselComponent],
 })
 export class SharedModule {}
