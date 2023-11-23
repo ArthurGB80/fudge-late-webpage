@@ -12,13 +12,13 @@
     <button mat-button routerLink="/info">Informações de Envio, Troca, Devolução</button>
   </div>
   <div class="icon-buttons">
-    <button mat-icon-button routerLink="/search">
+    <button mat-icon-button routerLink="/search" aria-label="Search">
       <mat-icon>search</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/account">
+    <button mat-icon-button routerLink="/account" aria-label="Account">
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/cart">
+    <button mat-icon-button routerLink="/cart" aria-label="Cart">
       <mat-icon>shopping_cart</mat-icon>
     </button>
   </div>
@@ -26,11 +26,9 @@
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
-
-
 <mat-menu #menu="matMenu">
   <button mat-menu-item routerLink="/home">Início</button>
-  <button mat-menu-item routerLink="/products">Produtos</button>
+  <button mat-menu-item routerLink="/products" (click)="onProdutosClick()">Produtos</button>  
   <button mat-menu-item routerLink="/contact">Contatos</button>
   <button mat-menu-item routerLink="/about">Quem Somos</button>
   <button mat-menu-item routerLink="/info">Informações de Envio, Troca, Devolução</button>

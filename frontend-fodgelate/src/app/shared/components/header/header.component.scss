@@ -4,6 +4,10 @@
   }
 
   .mat-toolbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     justify-content: flex-start;
     height: 100px;
   }
@@ -27,6 +31,10 @@
 }
 
 .mat-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;

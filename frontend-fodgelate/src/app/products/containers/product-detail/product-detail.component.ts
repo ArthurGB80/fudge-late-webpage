@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Product } from '../../model/product';
 import { ProductsService } from '../../services/products.service';
-
+import { Product } from '../../model/product';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-  product: Observable<Product>;
+  product: Product | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,10 +16,14 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam) {
-      const id = +idParam;
-      this.product = this.productsService.getProduct(id);
-    }
+    this.route.params.subscribe((params) => {
+      const id = +params['id']; // convert id to number
+      const product = this.productsService.getProduct(id);
+      if (product) {
+        this.product = product;
+      } else {
+        // handle error, e.g., assign a default value or show an error message
+      }
+    });
   }
 }

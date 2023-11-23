@@ -1,16 +1,16 @@
-<div class="product-list">
-  <mat-card *ngFor="let product of products | async">
-    <mat-card-header>
-      <mat-card-title>{{ product.name }}</mat-card-title>
-      <mat-card-subtitle>Price: {{ product.price }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}">
-    <mat-card-content>
-      <p>{{ product.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button [routerLink]="['/', product._id]">View Details</button>
-      <button mat-button (click)="addToCart(product)">Add to Cart</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of products">
+      <div class="card">
+        <a [routerLink]="['/product', product._id]">
+          <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.price | currency:'BRL':'symbol':'1.2-2'}}</p>
+          <a [routerLink]="['/product', product._id]" class="btn btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

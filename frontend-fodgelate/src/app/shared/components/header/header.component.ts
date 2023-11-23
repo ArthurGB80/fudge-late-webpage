@@ -25,4 +25,8 @@ export class HeaderComponent {
   openMenu() {
     this.menuOpen = !this.menuOpen;
   }
+
+  onProdutosClick(): void {
+    console.log('Produtos button clicked');
+  }
 }
