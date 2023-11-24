@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { AccountComponent } from './account/account.component';
@@ -13,6 +14,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
+import { ProductListComponent } from './products/components/product-list/product-list.component';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -26,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     AboutComponent,
     InfoComponent,
     AccountComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { SharedModule } from './shared/shared.module';
     ProductsModule,
     SharedModule,
     NgbModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent],
