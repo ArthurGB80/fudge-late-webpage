@@ -1,35 +1,6 @@
 <mat-toolbar color="primary">
-  <a routerLink="/home">
-    <div class="logo">
-      <img src="assets/img/logos/fudgelate-logo.jpg" alt="Logo">
-    </div>
-  </a>
-  <div class="menu-items" *ngIf="!isMobile">
-    <button mat-button routerLink="/home">Início</button>
-    <button mat-button routerLink="/products">Produtos</button>
-    <button mat-button routerLink="/contact">Contatos</button>
-    <button mat-button routerLink="/about">Quem Somos</button>
-    <button mat-button routerLink="/info">Informações de Envio, Troca, Devolução</button>
-  </div>
-  <div class="icon-buttons">
-    <button mat-icon-button routerLink="/search" aria-label="Search">
-      <mat-icon>search</mat-icon>
-    </button>
-    <button mat-icon-button routerLink="/account" aria-label="Account">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-    <button mat-icon-button routerLink="/cart" aria-label="Cart">
-      <mat-icon>shopping_cart</mat-icon>
-    </button>
-  </div>
-  <button mat-icon-button *ngIf="isMobile" [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <app-logo></app-logo>
+  <app-navigation-menu *ngIf="!isMobile"></app-navigation-menu>
+  <app-icon-buttons></app-icon-buttons>
+  <app-mobile-menu *ngIf="isMobile"></app-mobile-menu>
 </mat-toolbar>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/home">Início</button>
-  <button mat-menu-item routerLink="/products" (click)="onProdutosClick()">Produtos</button>  
-  <button mat-menu-item routerLink="/contact">Contatos</button>
-  <button mat-menu-item routerLink="/about">Quem Somos</button>
-  <button mat-menu-item routerLink="/info">Informações de Envio, Troca, Devolução</button>
-</mat-menu>

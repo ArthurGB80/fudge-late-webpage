@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'info', component: InfoComponent },
   { path: 'account', component: AccountComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to home page by default
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  
 ];
 
 @NgModule({

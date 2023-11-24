@@ -1,0 +1,31 @@
+@media screen and (max-width: 600px) {
+  .menu-items {
+    display: none;
+  }
+
+  .mat-toolbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    justify-content: flex-start;
+    height: 100px;
+  }
+
+  .logo {
+    margin-right: 15px;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  button {
+    margin: 0 5px;
+    font-size: 12px;
+  }
+
+  .icon-buttons {
+    margin-left: 20px;
+  }
+}

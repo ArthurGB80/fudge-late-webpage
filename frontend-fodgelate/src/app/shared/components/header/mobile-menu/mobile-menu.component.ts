@@ -1,17 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: 'app-mobile-menu',
+  templateUrl: './mobile-menu.component.html',
+  styleUrls: ['./mobile-menu.component.scss']
 })
-export class HeaderComponent {
-  isMobile = false;
-  menuOpen = false;
+export class MobileMenuComponent implements OnInit {
+  isMobile: boolean;
 
   constructor() {
     this.checkScreenSize();
   }
+
+  ngOnInit() {}
 
   @HostListener('window:resize')
   checkScreenSize() {
@@ -21,10 +22,6 @@ export class HeaderComponent {
     } else {
       this.isMobile = false;
     }
-  }
-
-  openMenu() {
-    this.menuOpen = !this.menuOpen;
   }
 
   onProdutosClick(): void {
