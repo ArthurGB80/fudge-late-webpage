@@ -1,0 +1,15 @@
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 50;
+  height: 80px;
+}
+
+.active {
+  background-color: yellow;
+}

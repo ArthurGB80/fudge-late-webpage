@@ -1,0 +1,6 @@
+<mat-toolbar color="primary">
+  <app-logo></app-logo>
+  <app-navigation-menu *ngIf="!isMobile"></app-navigation-menu>
+  <app-icon-buttons></app-icon-buttons>
+  <app-mobile-menu *ngIf="isMobile"></app-mobile-menu>
+</mat-toolbar>
