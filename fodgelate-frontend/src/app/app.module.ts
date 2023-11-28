@@ -5,16 +5,17 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AboutComponent } from './about/about.component';
-import { AccountComponent } from './account/account.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AboutComponent } from './modules/about/about.component';
+import { AccountComponent } from './modules/account/account.component';
+import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { ContactComponent } from './contact/contact.component';
-import { HomeComponent } from './home/home.component';
-import { InfoComponent } from './info/info.component';
-import { ProductsModule } from './products/products.module';
+import { CartComponent } from './modules/cart/cart.component';
+import { CheckoutComponent } from './modules/checkout/checkout.component';
+import { ContactComponent } from './modules/contact/contact.component';
+import { HomeComponent } from './modules/home/home.component';
+import { InfoComponent } from './modules/info/info.component';
+import { ProductListComponent } from './modules/products/components/product-list/product-list.component';
+import { ProductsModule } from './modules/products/products.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     AboutComponent,
     InfoComponent,
     AccountComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { SharedModule } from './shared/shared.module';
     ProductsModule,
     SharedModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

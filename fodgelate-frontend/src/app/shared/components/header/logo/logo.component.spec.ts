@@ -6,10 +6,12 @@ describe('LogoComponent', () => {
   let component: LogoComponent;
   let fixture: ComponentFixture<LogoComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [LogoComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [LogoComponent]
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(LogoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
