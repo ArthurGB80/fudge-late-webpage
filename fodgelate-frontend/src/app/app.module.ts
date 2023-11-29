@@ -14,7 +14,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
-import { ProductListComponent } from './products/components/product-list/product-list.component';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -28,7 +27,6 @@ import { SharedModule } from './shared/shared.module';
     AboutComponent,
     InfoComponent,
     AccountComponent,
-    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +36,7 @@ import { SharedModule } from './shared/shared.module';
     ProductsModule,
     SharedModule,
     NgbModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@angular/material/theming';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @include mat-core();
 
 $black-87-opacity: rgba(black, 0.87);
@@ -21,8 +22,7 @@ $custom-orange: (
   A200: #ffab40,
   A400: #ff9100,
   A700: #ff6d00,
-  contrast: (
-    50: $black-87-opacity,
+  contrast: (50: $black-87-opacity,
     100: $black-87-opacity,
     200: $black-87-opacity,
     300: $black-87-opacity,
@@ -40,15 +40,17 @@ $custom-orange: (
 );
 
 $custom-app-primary: mat-palette($custom-orange, 200);
-$custom-app-accent:  mat-palette($mat-indigo, A200, A100, A400);
+$custom-app-accent: mat-palette($mat-indigo, A200, A100, A400);
 $custom-app-warn: mat-palette($mat-red);
 
-$custom-theme: mat-light-theme($custom-app-primary, $custom-app-accent,  $custom-app-warn);
+$custom-theme: mat-light-theme($custom-app-primary, $custom-app-accent, $custom-app-warn);
 
 @include angular-material-theme($custom-theme);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;

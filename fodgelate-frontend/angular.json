@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fodgelate-frontend:build:production"
+              "buildTarget": "fodgelate-frontend:build:production"
             },
             "development": {
-              "browserTarget": "fodgelate-frontend:build:development"
+              "buildTarget": "fodgelate-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fodgelate-frontend:build"
+            "buildTarget": "fodgelate-frontend:build"
           }
         },
         "test": {
