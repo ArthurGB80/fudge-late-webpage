@@ -6,12 +6,10 @@ describe('ConfirmationDialogComponent', () => {
   let component: ConfirmationDialogComponent;
   let fixture: ComponentFixture<ConfirmationDialogComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ConfirmationDialogComponent]
-    })
-    .compileComponents();
-    
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ConfirmationDialogComponent]
+    });
     fixture = TestBed.createComponent(ConfirmationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -6,7 +6,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./mobile-menu.component.scss']
 })
 export class MobileMenuComponent implements OnInit {
-  isMobile: boolean = false;
+  isMobile: boolean;
 
   constructor() {
     this.checkScreenSize();

@@ -6,12 +6,10 @@ describe('ErrorDialogComponent', () => {
   let component: ErrorDialogComponent;
   let fixture: ComponentFixture<ErrorDialogComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ErrorDialogComponent]
-    })
-    .compileComponents();
-    
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ErrorDialogComponent]
+    });
     fixture = TestBed.createComponent(ErrorDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
