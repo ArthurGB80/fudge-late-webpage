@@ -1,0 +1,113 @@
+.product-card {
+  display: flex;
+  flex-direction: row;
+  margin-top: 165px;
+  margin-bottom: 60px;
+  padding: 20px;
+
+  
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+  }
+}
+
+.product-image {
+  position: relative;
+  width: 60%;
+  height: 400px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 20%;
+  margin-right: 10%;
+  border-radius: 20px;
+  cursor: none;
+}
+
+.zoom-box {
+  position: absolute;
+  right: auto;
+  width: 200px;
+  height: 200px;
+  background-size: 500%;
+  background-position: center;
+  border-radius: 50%;
+  transition: background-size 0.5s;
+}
+
+mat-card-title {
+  text-align: justify;
+  overflow: hidden;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-top: 35px;
+  margin-bottom: 10px;
+}
+
+.product-expiry {
+  text-align: justify;
+  font-size: 0.8em;
+  color: gray;
+  margin-top: 1em;
+}
+
+.product-weight {
+  text-align: justify;
+  font-size: 0.8em;
+  color: gray;
+  margin-top: 0em;
+}
+
+mat-card-subtitle {
+  text-align: justify;
+  font-size: 1em;
+  color: gray;
+  margin-top: 1em;
+}
+
+.product-details {
+  padding: 1em;
+}
+
+mat-card-content {
+  text-align: justify;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  p {
+    margin-bottom: 1em;
+    margin-right: 100px;
+    line-height: 1.5em;
+    font-size: 0.9em;
+    text-align: justify;
+
+  }
+}
+
+.product-actions {
+  display: flex;
+  align-self: end;
+  gap: 10px;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 60px;
+  height: 70px;
+}
+
+.product-actions button {
+  height: 30px;
+  align-self: center;
+  background-color: #FFCC80;
+}
+
+.product-category {
+  margin-top: auto;
+  font-size: 0.8em;
+  color: gray;
+}
+

@@ -1,31 +1,17 @@
-@media screen and (max-width: 600px) {
-  .menu-items {
-    display: none;
-  }
+@media screen and (max-width: 900px) {
+  #mobileMenuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 13px;
+    right: 10px;
+    top: 10px;
 
-  .mat-toolbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    justify-content: flex-start;
-    height: 100px;
-  }
+    mat-icon {
+      font-size: 45px;  // Adjust this value as needed
+      height: 45px;  // Adjust this value as needed
+      width: 50px;  // Adjust this value as needed
+    }
 
-  .logo {
-    margin-right: 15px;
-  }
-
-  .logo img {
-    height: 50px;
-  }
-
-  button {
-    margin: 0 5px;
-    font-size: 12px;
-  }
-
-  .icon-buttons {
-    margin-left: 20px;
   }
 }

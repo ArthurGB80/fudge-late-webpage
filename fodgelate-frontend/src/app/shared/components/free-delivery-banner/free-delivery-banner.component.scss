@@ -1,0 +1,23 @@
+:host {
+  position: absolute;
+  flex-direction: column;
+  top: 0;
+  width: 100%;
+  z-index: 1050;
+}
+
+.alert {
+  padding: 5px;
+  color: #FFB74D;
+  background-color: #464646;
+  border-color: transparent;
+  text-align: center;
+  border-radius: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .alert {
+    font-size: 1em ;
+  }
+
+}

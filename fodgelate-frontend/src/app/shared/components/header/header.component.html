@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" [ngClass]="{'navbar-transparent': !isScrollingDown, 'navbar-opaque': isScrollingDown, 'navbar-hidden': isScrollingDown && currentScrollTop > lastScrollTop}">
   <app-logo></app-logo>
   <app-navigation-menu *ngIf="!isMobile"></app-navigation-menu>
   <app-icon-buttons></app-icon-buttons>

@@ -6,7 +6,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./navigation-menu.component.scss']
 })
 export class NavigationMenuComponent implements OnInit {
-  isMobile: boolean;
+  isMobile: boolean = false;
 
   constructor() {
     this.checkScreenSize();
@@ -17,7 +17,7 @@ export class NavigationMenuComponent implements OnInit {
   @HostListener('window:resize')
   checkScreenSize() {
     const width = window.innerWidth;
-    if (width <= 600) {
+    if (width <= 900) {
       this.isMobile = true;
     } else {
       this.isMobile = false;
