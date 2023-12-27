@@ -10,8 +10,12 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 public class CartService {
 
+    private final CartRepository cartRepository;    
+
     @Inject
-    CartRepository cartRepository;
+    public CartService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
 
     @Transactional
     public Cart createCart(Cart cart) {
@@ -19,5 +23,29 @@ public class CartService {
         return cart;
     }
 
-    // Other service methods...
+    public Cart getCart(Long id) {
+        return cartRepository.findById(id);
+    }
+
+    public Cart updateCart(Long id, Cart newCart) {
+        Cart cart = cartRepository.findById(id);
+        if (cart != null) {
+            cart.setProducts(newCart.getProducts());
+            // set other fields as needed...
+            cartRepository.persist(cart);
+        }
+        return cart;
+    }
+    
+    public boolean deleteCart(Long id) {
+        Cart cart = cartRepository.findById(id);
+        if (cart != null) {
+            cartRepository.delete(cart);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

@@ -1,29 +1,30 @@
 package com.fudgelate.service;
 
-import java.util.List;
-
 import com.fudgelate.model.Product;
 import com.fudgelate.repository.ProductRepository;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import java.util.List;
+
+
 
 @ApplicationScoped
 public class ProductService {
 
-    @Inject
-    ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    @Inject 
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> getProducts() {
         return productRepository.listAll();
     }
 
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
         productRepository.persist(product);
-    }
-
-    public void deleteProduct(Long productId) {
-        productRepository.deleteById(productId);
+        return product;
     }
 
     public void updateProduct(Product product) {
@@ -34,9 +35,29 @@ public class ProductService {
             productRepository.persist(existingProduct);
         }
     }
+    public Product getProduct(Long id) {
+        return productRepository.findById(id);
+    }
 
-    // Remove this method if ProductRepository doesn't have a search method
-    // public List<Product> searchProducts(String keyword) {
-    //     return productRepository.search(keyword);
-    // }
+    public Product updateProduct(Long id, Product newProduct) {
+        Product product = productRepository.findById(id);
+        if (product != null) {
+            product.setName(newProduct.getName());
+            product.setPrice(newProduct.getPrice());
+            // set other fields 
+            productRepository.persist(product);
+        }
+        return product;
+    }
+    
+    public boolean deleteProduct(Long id) {
+        Product product = productRepository.findById(id);
+        if (product != null) {
+            productRepository.delete(product);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

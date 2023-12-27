@@ -7,5 +7,5 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
-    // additional custom methods if needed
+    // additional custom methods 
 }

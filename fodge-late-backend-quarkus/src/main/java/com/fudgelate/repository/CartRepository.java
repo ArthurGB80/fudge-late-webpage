@@ -7,5 +7,5 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CartRepository implements PanacheRepository<Cart> {
-    // additional custom methods if needed
+    // additional custom methods 
 }

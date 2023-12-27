@@ -15,8 +15,12 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 public class UserService {
 
+    private final UserRepository userRepository;
+
     @Inject
-    UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public User createUser(User user) throws NoSuchAlgorithmException {
@@ -34,5 +38,29 @@ public class UserService {
         return user;
     }
 
-    // Other service methods...
+    public User getUser(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public User updateUser(Long id, User newUser) {
+        User user = userRepository.findById(id);
+        if (user != null) {
+            user.setUsername(newUser.getUsername());
+            user.setEmail(newUser.getEmail());
+            // set other fields
+            userRepository.persist(user);
+        }
+        return user;
+    }
+    
+    public boolean deleteUser(Long id) {
+        User user = userRepository.findById(id);
+        if (user != null) {
+            userRepository.delete(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

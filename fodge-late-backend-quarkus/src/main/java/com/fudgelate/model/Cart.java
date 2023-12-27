@@ -17,14 +17,14 @@ public class Cart {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> items;
+    private List<Product> products;
 
     public Cart() {
     }
 
-    public Cart(Long id, List<CartItem> items) {
+    public Cart(Long id, List<Product> products) {
         this.id = id;
-        this.items = items;
+        this.products = products;
     }
 
     public Long getId() {
@@ -35,11 +35,11 @@ public class Cart {
         this.id = id;
     }
 
-    public List<CartItem> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setItems(List<CartItem> items) {
-        this.items = items;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class CartItem {
+public class CartDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,10 +18,10 @@ public class CartItem {
 
     private int quantity;
 
-    public CartItem() {
+    public CartDetails() {
     }
 
-    public CartItem(Long id, Product product, int quantity) {
+    public CartDetails(Long id, Product product, int quantity) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
