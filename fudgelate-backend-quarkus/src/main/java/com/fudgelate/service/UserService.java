@@ -5,21 +5,26 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.List;
 
 import com.fudgelate.model.User;
 import com.fudgelate.repository.UserRepository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+
 @ApplicationScoped
 public class UserService {
 
     private final UserRepository userRepository;
+    private final EntityManager entityManager;
 
     @Inject
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, EntityManager entityManager) {
         this.userRepository = userRepository;
+        this.entityManager = entityManager;
     }
 
     @Transactional
@@ -42,17 +47,22 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public List<User> getAllUsers() {
+        return userRepository.listAll();
+    }
+
+    @Transactional
     public User updateUser(Long id, User newUser) {
         User user = userRepository.findById(id);
         if (user != null) {
             user.setUsername(newUser.getUsername());
             user.setEmail(newUser.getEmail());
-            // set other fields
-            userRepository.persist(user);
+            user = entityManager.merge(user);
         }
         return user;
     }
-    
+
+    @Transactional
     public boolean deleteUser(Long id) {
         User user = userRepository.findById(id);
         if (user != null) {

@@ -1,6 +1,7 @@
 package com.fudgelate.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import com.fudgelate.model.User;
 import com.fudgelate.service.UserService;
@@ -16,8 +17,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-
 
 @Path("/api/users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -45,11 +44,21 @@ public class UserController {
     @GET
     @Path("/{id}")
     public Response getUser(@PathParam("id") Long id) {
-    User user = userService.getUser(id);
+        User user = userService.getUser(id);
         if (user != null) {
             return Response.ok(user).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @GET
+    public Response getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        if (!users.isEmpty()) {
+            return Response.ok(users).build();
+        } else {
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
     }
 
@@ -73,4 +82,5 @@ public class UserController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
+
 }

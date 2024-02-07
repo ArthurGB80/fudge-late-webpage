@@ -27,6 +27,10 @@ public class Cart {
         this.products = products;
     }
 
+    public Cart(List<Product> products) {
+        this.products = products;
+    }
+
     public Long getId() {
         return id;
     }

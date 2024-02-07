@@ -35,6 +35,7 @@ public class CartController {
     public Cart createCart(Cart cart) {
         return cartService.createCart(cart);
     }
+
     @GET
     @Path("/{id}")
     public Response getCart(@PathParam("id") Long id) {
@@ -46,7 +47,7 @@ public class CartController {
         }
     }
 
-        @PUT
+    @PUT
     @Path("/{id}")
     public Response updateCart(@PathParam("id") Long id, Cart newCart) {
         Cart updatedCart = cartService.updateCart(id, newCart);
