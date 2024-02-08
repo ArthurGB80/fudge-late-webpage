@@ -1,5 +1,6 @@
 package com.fudgelate.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -11,7 +12,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cart {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,6 +21,7 @@ public class Cart {
     private List<Product> products;
 
     public Cart() {
+        this.products = new ArrayList<>();
     }
 
     public Cart(Long id, List<Product> products) {
