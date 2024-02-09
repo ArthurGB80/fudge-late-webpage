@@ -1,0 +1,149 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: ecommerce-platform-template
+objects:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: angular-frontend
+  spec:
+    replicas:  2
+    selector:
+      matchLabels:
+        app: angular-frontend
+    strategy:
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: angular-frontend
+      spec:
+        containers:
+        - name: angular-frontend
+          image: 'arthurgb80/nginx-custom:1.24.0'
+          ports:
+          - containerPort:  8080
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: angular-frontend-service
+  spec:
+    selector:
+      app: angular-frontend
+    ports:
+    - protocol: TCP
+      port:  8080
+      targetPort:  8080
+    type: LoadBalancer
+
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: quarkus-backend
+  spec:
+    replicas:  2
+    selector:
+      matchLabels:
+        app: quarkus-backend
+    strategy:
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: quarkus-backend
+      spec:
+        containers:
+        - name: quarkus-backend
+          image: 'quarkus~https://github.com/your-repo/quarkus-backend.git' # Replace with the correct image reference
+          ports:
+          - containerPort:  8080
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: quarkus-backend-service
+  spec:
+    selector:
+      app: quarkus-backend
+    ports:
+    - protocol: TCP
+      port:  8080
+      targetPort:  8080
+    type: ClusterIP
+
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: postgresql-database
+  spec:
+    replicas:  1
+    selector:
+      matchLabels:
+        app: postgresql-database
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          app: postgresql-database
+      spec:
+        containers:
+        - name: postgresql-database
+          image: 'registry.access.redhat.com/rhscl/postgresql-10-rhel7'
+          ports:
+          - containerPort:  5432
+          volumeMounts:
+          - mountPath: /var/lib/pgsql/data
+            name: postgresql-storage
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-credentials
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-credentials
+                key: password
+          - name: POSTGRES_DB
+            value: fudge-late
+        volumes:
+        - name: postgresql-storage
+          persistentVolumeClaim:
+            claimName: postgresql-pvc
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: postgresql-service
+  spec:
+    selector:
+      app: postgresql-database
+    ports:
+    - protocol: TCP
+      port:  5432
+      targetPort:  5432
+    type: ClusterIP
+
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: postgresql-pvc
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage:  1Gi
+
+- apiVersion: v1
+  kind: Secret
+  metadata:
+    name: postgresql-credentials
+  type: Opaque
+  stringData:
+    username: <base64-encoded-username>
+    password: <base64-encoded-password>
