@@ -13,20 +13,18 @@ spec:
     spec:
       containers:
       - name: postgresql
-        image: quay.io/redhatdemo/openshift-pgsql12-primary:centos7
+        image: postgres:16.1-alpine3.19
         imagePullPolicy: Always
         ports:
         - name: tcp
           containerPort:  5432
         env:
-        - name: PG_USER_PASSWORD
+        - name: POSTGRES_USER
           value: quarkus
-        - name: PG_USER_NAME
+        - name: POSTGRES_PASSWORD
           value: quarkus
-        - name: PG_DATABASE
+        - name: POSTGRES_DB
           value: quarkus
-        - name: PG_NETWORK_MASK
-          value: all
         resources:
           limits:
             cpu: "1"
@@ -43,8 +41,8 @@ spec:
   ports:
     - name: pgsql
       protocol: TCP
-      port: 5432
-      targetPort: 5432
+      port:  5432
+      targetPort:  5432
   type: ClusterIP
   selector:
     app: postgresql
