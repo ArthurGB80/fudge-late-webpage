@@ -19,11 +19,11 @@ export class FooterComponentComponent {
       const email = this.subscribeForm.value.email;
       if (email) {
         this.newsletterService.subscribe(email).subscribe(
-          (response: any) => { // Specify the type for the response
+          (response: any) => {
             // Handle successful subscription
             console.log('Subscribed successfully', response);
           },
-          (error: any) => { // Specify the type for the error
+          (error: any) => { 
             // Handle error
             console.error('Error subscribing', error);
           }
