@@ -1,0 +1,45 @@
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  height: 130px;
+  background-color: transparent;
+  transition: top 0.5s, background-color 0.5s;
+  margin-top: 35px;
+}
+
+.mat-toolbar.navbar-transparent {
+  background-color: transparent;
+}
+
+.mat-toolbar.navbar-opaque {
+  background-color: #FFE0B2;
+}
+
+.mat-toolbar.navbar-hidden {
+  top: -35px;
+}
+
+@media screen and (max-width: 900px) {
+  .menu-items {
+    display: none;
+  }
+
+  .mat-toolbar {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 70px;
+    background-color: transparent;
+
+  }
+
+}

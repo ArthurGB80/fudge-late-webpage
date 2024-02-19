@@ -1,0 +1,9 @@
+<button id="mobileMenuButton" mat-icon-button *ngIf="isMobile" [matMenuTriggerFor]="menu">
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+<button mat-menu-item routerLink="/home">Início</button>
+<button mat-menu-item routerLink="/products" >Produtos</button>
+<button mat-menu-item routerLink="/contact">Contatos</button>
+<button mat-menu-item routerLink="/about">Quem Somos</button>
+</mat-menu>

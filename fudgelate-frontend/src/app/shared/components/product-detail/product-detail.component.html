@@ -1,0 +1,32 @@
+<app-free-delivery-banner></app-free-delivery-banner>
+
+<mat-card *ngIf="product" class="product-card">
+  <div class="product-image" [style.backgroundImage]="'url(' + product.imageUrl + ')'" (mouseenter)="showZoom = true"
+    (mouseleave)="showZoom = false" (mousemove)="onMouseMove($event)">
+  </div>
+  <div class="zoom-box" *ngIf="showZoom" [style.backgroundImage]="'url(' + product.imageUrl + ')'"
+    [style.left.px]="mouseX" [style.top.px]="mouseY" [style.backgroundPosition]="backgroundPosition">
+  </div>
+
+  <div class="product-details">
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <div class="product-expiry">Validade: {{ product.expiryDate }}</div>
+    <mat-card-subtitle>R$ {{ product.price }},0</mat-card-subtitle>
+    <mat-card-content>
+      <p>{{ product.description }}</p>
+    </mat-card-content>
+    <div class="shipping-calculator">
+      <!-- Shipping calculator goes here -->
+    </div>
+    <div class="product-weight">Peso líquido: {{ product.weight }}g</div>
+    <div class="product-actions">
+      <mat-form-field appearance="fill">
+        <mat-label></mat-label>
+        <input matInput type="number" min="1" max="100" step="1">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="buyProduct()">Comprar</button>
+    </div>
+    <div class="product-category">Categoria: {{ product.category }}</div>
+  </div>
+</mat-card>
+<app-product-list></app-product-list>

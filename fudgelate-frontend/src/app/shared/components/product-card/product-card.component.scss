@@ -1,0 +1,30 @@
+.container {
+  margin-top: 0px;
+}
+
+.card {
+  background-color: transparent;
+  border-color: transparent !important;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  color: #413131;
+}
+
+.zoom {
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  transform: scale(1.05);
+}
+
+mat-raised-button {
+  height: 100px;
+  align-self: center;
+  background-color: #FFCC80;
+
+}

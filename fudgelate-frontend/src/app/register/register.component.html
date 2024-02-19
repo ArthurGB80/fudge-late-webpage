@@ -1,0 +1,24 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title class="mat-dialog-title">Cadastre-se</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="firstName" placeholder="Primeiro nome">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Sobrenome</mat-label>
+    <input matInput formControlName="lastName" placeholder="Sobrenome">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="Seu email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Senha</mat-label>
+    <input matInput type="password" formControlName="password" placeholder="Escolha uma senha">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+</form>

@@ -1,0 +1,191 @@
+.about-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 165px;
+}
+
+.header-section {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #f9fafb;
+}
+
+.image1 {
+  width: 100%;
+  position: relative;
+}
+
+.image1 img {
+  width: 100%;
+  height: auto;
+}
+
+.image-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 4em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-style: italic;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.image-text3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 4em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-style: italic;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.text-section {
+  width: 45%;
+  padding: 20px;
+  text-align: start;
+  margin-left: 70px;
+
+  h2 {
+    align-items: center;
+    font-weight: 1000;
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.0em;
+  }
+}
+
+.image2 {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.image2 img {
+  width: 100%;
+  height: auto;
+}
+
+.footer-section {
+  width: 100%;
+  text-align: center;
+  padding: 100px;
+  background-color: #f8f9fa;
+}
+
+.image3 {
+  width: 100%;
+  position: relative;
+
+}
+
+.image3 img {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .about-page {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-section {
+    font-size: 0.8em;
+  }
+
+  .mat-toolbar {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100px;
+  }
+
+  .content-section {
+    flex-direction: column;
+  }
+
+  .image1 img {
+    width: 100%;
+    height: auto;
+    margin-top: 0px;
+  }
+
+  .image-text {
+    font-size: 2.3em;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .text-section {
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    margin-left: 0px;
+    margin-right: 0px;
+    order: 1;
+
+    h2 {
+      align-items: center;
+      font-weight: 1000;
+      text-transform: uppercase;
+      font-size: small;
+    }
+
+    p {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1.0em;
+    }
+  }
+
+  .image-text3 {
+    font-size: 1.7em;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .image2 {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    order: 2;
+  }
+
+}
