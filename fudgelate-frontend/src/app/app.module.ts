@@ -12,7 +12,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AboutComponent } from './about/about.component';
 import { AccountComponent } from './account/account.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +25,8 @@ import { ProductpageComponent } from './productpage/productpage.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductCardComponent } from './shared/components/product-card/product-card.component';
 import { SharedModule } from './shared/shared.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -63,4 +64,4 @@ import { SharedModule } from './shared/shared.module';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

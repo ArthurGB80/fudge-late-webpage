@@ -38,6 +38,7 @@ coverage
 libpeerconnection.log
 testem.log
 typings
+Original_video.mp4
 
 # System files
 .DS_Store
