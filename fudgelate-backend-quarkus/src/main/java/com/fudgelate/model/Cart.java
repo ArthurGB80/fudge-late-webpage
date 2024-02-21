@@ -2,6 +2,7 @@ package com.fudgelate.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,35 +18,69 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartDetails> cartDetails;
 
     public Cart() {
-        this.products = new ArrayList<>();
+        this.cartDetails = new ArrayList<>();
     }
 
-    public Cart(Long id, List<Product> products) {
+    public Cart(Long id, List<CartDetails> cartDetails) {
         this.id = id;
-        this.products = products;
+        this.cartDetails = cartDetails;
     }
 
-    public Cart(List<Product> products) {
-        this.products = products;
+    public Cart(List<CartDetails> cartDetails) {
+        this.cartDetails = cartDetails;
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Cart id(Long id) {
+        setId(id);
+        return this;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public Cart cartDetails(List<CartDetails> cartDetails) {
+        setCartDetails(cartDetails);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Cart)) {
+            return false;
+        }
+        Cart cart = (Cart) o;
+        return Objects.equals(id, cart.id) && Objects.equals(cartDetails, cart.cartDetails);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cartDetails);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", cartDetails='" + getCartDetails() + "'" +
+                "}";
+    }
+
+    public List<CartDetails> getCartDetails() {
+        return cartDetails;
+    }
+
+    public void setCartDetails(List<CartDetails> cartDetails) {
+        this.cartDetails = cartDetails;
     }
 }

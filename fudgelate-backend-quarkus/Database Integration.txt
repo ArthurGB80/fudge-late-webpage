@@ -37,6 +37,7 @@ Example for UserRepository:
 Write SQL Scripts:
 Create SQL scripts to set up the database schema, including tables and relationships.
 Place these scripts in the resources directory, typically named import.sql.
+
 Run Migrations:
 Use Quarkus' built-in migration tools to apply the database schema changes.
 Configure the migration properties in application.properties.

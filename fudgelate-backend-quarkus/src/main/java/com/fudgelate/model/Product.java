@@ -1,6 +1,7 @@
 package com.fudgelate.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Product {
     @NotNull
     private Double price;
 
-    @NotNull
+    @Min(0)
     private Integer inventoryCount;
 
     private String description;
@@ -33,8 +34,6 @@ public class Product {
     private String dimensions;
     private LocalDateTime releaseDate;
     private Double discountedPrice;
-
-    private Integer quantity;
 
     public Product() {
     }
@@ -52,23 +51,6 @@ public class Product {
         this.dimensions = dimensions;
         this.releaseDate = releaseDate;
         this.discountedPrice = discountedPrice;
-    }
-
-    public Long getProductId() {
-        return id;
-    }
-
-    public void setProductId(Long productId) {
-        this.id = productId;
-    }
-
-    // Getter and setter for quantity
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -157,6 +139,100 @@ public class Product {
 
     public void setDiscountedPrice(Double discountedPrice) {
         this.discountedPrice = discountedPrice;
+    }
+
+    public Product id(Long id) {
+        setId(id);
+        return this;
+    }
+
+    public Product name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public Product price(Double price) {
+        setPrice(price);
+        return this;
+    }
+
+    public Product inventoryCount(Integer inventoryCount) {
+        setInventoryCount(inventoryCount);
+        return this;
+    }
+
+    public Product description(String description) {
+        setDescription(description);
+        return this;
+    }
+
+    public Product category(String category) {
+        setCategory(category);
+        return this;
+    }
+
+    public Product imageUrl(String imageUrl) {
+        setImageUrl(imageUrl);
+        return this;
+    }
+
+    public Product weight(Double weight) {
+        setWeight(weight);
+        return this;
+    }
+
+    public Product dimensions(String dimensions) {
+        setDimensions(dimensions);
+        return this;
+    }
+
+    public Product releaseDate(LocalDateTime releaseDate) {
+        setReleaseDate(releaseDate);
+        return this;
+    }
+
+    public Product discountedPrice(Double discountedPrice) {
+        setDiscountedPrice(discountedPrice);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Product)) {
+            return false;
+        }
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name)
+                && Objects.equals(price, product.price) && Objects.equals(inventoryCount, product.inventoryCount)
+                && Objects.equals(description, product.description) && Objects.equals(category, product.category)
+                && Objects.equals(imageUrl, product.imageUrl) && Objects.equals(weight, product.weight)
+                && Objects.equals(dimensions, product.dimensions) && Objects.equals(releaseDate, product.releaseDate)
+                && Objects.equals(discountedPrice, product.discountedPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, inventoryCount, description, category, imageUrl, weight, dimensions,
+                releaseDate, discountedPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", name='" + getName() + "'" +
+                ", price='" + getPrice() + "'" +
+                ", inventoryCount='" + getInventoryCount() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", category='" + getCategory() + "'" +
+                ", imageUrl='" + getImageUrl() + "'" +
+                ", weight='" + getWeight() + "'" +
+                ", dimensions='" + getDimensions() + "'" +
+                ", releaseDate='" + getReleaseDate() + "'" +
+                ", discountedPrice='" + getDiscountedPrice() + "'" +
+                "}";
     }
 
 }
