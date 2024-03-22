@@ -1,6 +1,5 @@
 package com.fudgelate.controller;
 
-
 import com.fudgelate.model.Cart;
 import com.fudgelate.service.CartService;
 import jakarta.inject.Inject;
@@ -14,9 +13,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-
-
 
 @Path("/api/cart")
 @Produces(MediaType.APPLICATION_JSON)

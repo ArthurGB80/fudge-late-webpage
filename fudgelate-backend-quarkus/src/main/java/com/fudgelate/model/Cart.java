@@ -1,54 +1,80 @@
 package com.fudgelate.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapKeyJoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long cartid;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartDetails> cartDetails;
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ElementCollection
+    @MapKeyJoinColumn(name = "product_id")
+    @Column(name = "quantity")
+    private Map<Product, Integer> products = new HashMap<>();
+
 
     public Cart() {
-        this.cartDetails = new ArrayList<>();
     }
 
-    public Cart(Long id, List<CartDetails> cartDetails) {
-        this.id = id;
-        this.cartDetails = cartDetails;
+    public Cart(Long cartid, User user, Map<Product,Integer> products) {
+        this.cartid = cartid;
+        this.user = user;
+        this.products = products;
     }
 
-    public Cart(List<CartDetails> cartDetails) {
-        this.cartDetails = cartDetails;
+    public Long getCartid() {
+        return this.cartid;
     }
 
-    public Long getId() {
-        return this.id;
+    public void setCartid(Long cartid) {
+        this.cartid = cartid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getUser() {
+        return this.user;
     }
 
-    public Cart id(Long id) {
-        setId(id);
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Map<Product,Integer> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Map<Product,Integer> products) {
+        this.products = products;
+    }
+
+    public Cart cartid(Long cartid) {
+        setCartid(cartid);
         return this;
     }
 
-    public Cart cartDetails(List<CartDetails> cartDetails) {
-        setCartDetails(cartDetails);
+    public Cart user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public Cart products(Map<Product,Integer> products) {
+        setProducts(products);
         return this;
     }
 
@@ -60,27 +86,21 @@ public class Cart {
             return false;
         }
         Cart cart = (Cart) o;
-        return Objects.equals(id, cart.id) && Objects.equals(cartDetails, cart.cartDetails);
+        return Objects.equals(cartid, cart.cartid) && Objects.equals(user, cart.user) && Objects.equals(products, cart.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cartDetails);
+        return Objects.hash(cartid, user, products);
     }
 
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
-                ", cartDetails='" + getCartDetails() + "'" +
-                "}";
+            " cartid='" + getCartid() + "'" +
+            ", user='" + getUser() + "'" +
+            ", products='" + getProducts() + "'" +
+            "}";
     }
-
-    public List<CartDetails> getCartDetails() {
-        return cartDetails;
-    }
-
-    public void setCartDetails(List<CartDetails> cartDetails) {
-        this.cartDetails = cartDetails;
-    }
+    
 }

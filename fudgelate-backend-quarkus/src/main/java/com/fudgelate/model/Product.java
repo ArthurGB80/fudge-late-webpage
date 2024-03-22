@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,7 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long productId;
 
     @NotEmpty
     @NotNull
@@ -38,9 +39,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, Double price, Integer inventoryCount, String description, String category,
-            String imageUrl, Double weight, String dimensions, LocalDateTime releaseDate, Double discountedPrice) {
-        this.id = id;
+    public Product(Long productId, String name, Double price, Integer inventoryCount, String description,
+            String category, String imageUrl, Double weight, String dimensions, LocalDateTime releaseDate,
+            Double discountedPrice) {
+        this.productId = productId;
         this.name = name;
         this.price = price;
         this.inventoryCount = inventoryCount;
@@ -53,12 +55,12 @@ public class Product {
         this.discountedPrice = discountedPrice;
     }
 
-    public Long getId() {
-        return this.id;
+    public Long getProductId() {
+        return this.productId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -141,8 +143,8 @@ public class Product {
         this.discountedPrice = discountedPrice;
     }
 
-    public Product id(Long id) {
-        setId(id);
+    public Product productId(Long productId) {
+        setProductId(productId);
         return this;
     }
 
@@ -204,7 +206,7 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name)
+        return Objects.equals(productId, product.productId) && Objects.equals(name, product.name)
                 && Objects.equals(price, product.price) && Objects.equals(inventoryCount, product.inventoryCount)
                 && Objects.equals(description, product.description) && Objects.equals(category, product.category)
                 && Objects.equals(imageUrl, product.imageUrl) && Objects.equals(weight, product.weight)
@@ -214,14 +216,14 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, inventoryCount, description, category, imageUrl, weight, dimensions,
+        return Objects.hash(productId, name, price, inventoryCount, description, category, imageUrl, weight, dimensions,
                 releaseDate, discountedPrice);
     }
 
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
+                " productId='" + getProductId() + "'" +
                 ", name='" + getName() + "'" +
                 ", price='" + getPrice() + "'" +
                 ", inventoryCount='" + getInventoryCount() + "'" +
