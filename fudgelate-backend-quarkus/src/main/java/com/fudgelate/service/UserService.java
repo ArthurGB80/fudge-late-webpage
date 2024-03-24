@@ -7,7 +7,9 @@ import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
 
+import com.fudgelate.model.Cart;
 import com.fudgelate.model.User;
+import com.fudgelate.repository.CartRepository;
 import com.fudgelate.repository.UserRepository;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,11 +22,16 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final EntityManager entityManager;
+    private final CartService cartService;
+    private final CartRepository cartRepository;
 
     @Inject
-    public UserService(UserRepository userRepository, EntityManager entityManager) {
+    public UserService(UserRepository userRepository, EntityManager entityManager, CartService cartService,
+            CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.entityManager = entityManager;
+        this.cartService = cartService;
+        this.cartRepository = cartRepository;
     }
 
     @Transactional
@@ -40,7 +47,33 @@ public class UserService {
         String storedUserPassword = Base64.getEncoder().encodeToString(hashedPassword);
         user.setPassword(storedUserPassword);
         userRepository.persist(user);
+
+        // Create a new cart for the user
+        Cart cart = cartService.createCartForUser(user.getUserid());
+
+        // Associate the cart with the user
+        user.setCart(cart);
+        userRepository.persist(user);
+
         return user;
+    }
+
+    @Transactional
+    public Cart createCartForUser(Long userId) {
+        // Retrieve the user
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found for userId: " + userId);
+        }
+
+        // Create a new Cart entity
+        Cart cart = new Cart();
+        cart.setUser(user);
+
+        // Save the cart to the database
+        cartRepository.persist(cart);
+
+        return cart;
     }
 
     public User getUser(Long id) {

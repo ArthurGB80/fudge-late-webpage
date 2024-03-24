@@ -25,6 +25,9 @@ public class OrderService {
     @Inject
     UserRepository userRepository;
 
+    @Inject
+    CartService cartService;
+
     @Transactional
     public Order createOrder(Long userId) {
         // Retrieve the user's cart
@@ -34,7 +37,7 @@ public class OrderService {
         }
 
         // Calculate the total amount of the order
-        BigDecimal totalAmount = CartService.calculateTotalCartValue(userId); // Assuming Cart has a method to get the total amount
+        BigDecimal totalAmount = cartService.calculateTotalCartValue(cart);
 
         // Create a new Order entity
         Order order = new Order();

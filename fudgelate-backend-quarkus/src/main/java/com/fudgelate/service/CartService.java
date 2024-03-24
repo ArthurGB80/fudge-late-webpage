@@ -12,34 +12,69 @@ import com.fudgelate.repository.UserRepository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 public class CartService {
 
-    private final CartRepository cartRepository;
-    private static UserRepository userRepository = new UserRepository();
+    @Inject
+    CartRepository cartRepository;
 
     @Inject
-    public CartService(CartRepository cartRepository, UserRepository userRepository) { // Update this constructor
-        this.cartRepository = cartRepository;
-        CartService.userRepository = userRepository; // And this line
-    }
+    UserRepository userRepository;
+
+    @Inject
+    EntityManager entityManager;
 
     @Transactional
     public Cart createCartForUser(Long userId) {
-        return Optional.ofNullable(userRepository.findById(userId))
-                .map(user -> {
-                    Cart cart = new Cart();
-                    cart.setUser(user);
-                    cartRepository.persist(cart);
+        // Retrieve the user
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found for userId: " + userId);
+        }
 
-                    user.setCart(cart);
-                    userRepository.persist(user);
+        // Create a new Cart entity
+        Cart cart = new Cart();
+        cart.setUser(user);
 
-                    return cart;
-                })
-                .orElse(null);
+        // Save the cart to the database
+        cartRepository.persist(cart);
+
+        return cart;
+    }
+
+    @Transactional
+    public Cart getCart(Long id) {
+        return entityManager.find(Cart.class, id);
+    }
+
+    @Transactional
+    public Cart updateCart(Long userId, Cart newCart) {
+        // Find the user by ID
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            // Handle the case where the user does not exist
+            throw new IllegalArgumentException("User not found for userId: " + userId);
+        }
+
+        // Get the user's existing cart
+        Cart existingCart = user.getCart();
+        if (existingCart == null) {
+            // Handle the case where the user does not have a cart
+            throw new IllegalArgumentException("User does not have a cart for userId: " + userId);
+        }
+
+        // Update the existing cart with the new cart's contents
+        // This example assumes you want to replace the entire cart's contents
+        // You might need to adjust this based on your actual requirements
+        existingCart.setProducts(newCart.getProducts());
+
+        // Persist the updated cart
+        cartRepository.persist(existingCart);
+
+        return existingCart;
     }
 
     @Transactional
@@ -48,17 +83,36 @@ public class CartService {
                 .map(user -> {
                     Cart cart = user.getCart();
                     if (cart != null) {
-                        Integer currentQuantity = cart.getProducts().get(product);
-                        if (currentQuantity != null) {
-                            cart.getProducts().put(product, currentQuantity + 1);
-                        } else {
-                            cart.getProducts().put(product, 1);
-                        }
+                        Integer currentQuantity = cart.getProducts().getOrDefault(product, 0);
+                        cart.getProducts().put(product, currentQuantity + 1);
+                        cart.setTotalValue(calculateTotalCartValue(cart)); // Pass the cart object
                         cartRepository.persist(cart);
                     }
-                    return user.getCart();
+                    return cart;
                 })
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("User not found for userId: " + userId));
+    }
+
+    @Transactional
+    public Cart removeProductFromCart(Long userId, Product product) {
+        return Optional.ofNullable(userRepository.findById(userId))
+                .map(user -> {
+                    Cart cart = user.getCart();
+                    if (cart != null) {
+                        Integer currentQuantity = cart.getProducts().get(product);
+                        if (currentQuantity != null) {
+                            if (currentQuantity > 1) {
+                                cart.getProducts().put(product, currentQuantity - 1);
+                            } else {
+                                cart.getProducts().remove(product);
+                            }
+                            cart.setTotalValue(calculateTotalCartValue(cart)); // Pass the cart object
+                            cartRepository.persist(cart);
+                        }
+                    }
+                    return cart;
+                })
+                .orElseThrow(() -> new IllegalArgumentException("User not found for userId: " + userId));
     }
 
     @Transactional
@@ -75,45 +129,24 @@ public class CartService {
                             } else {
                                 cart.getProducts().remove(product);
                             }
+                            cart.setTotalValue(calculateTotalCartValue(cart)); // Pass the cart object
                             cartRepository.persist(cart);
                         }
                     }
-                    return user.getCart();
+                    return cart;
                 })
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("User not found for userId: " + userId));
     }
 
-    @Transactional
-    public Cart removeProductFromCart(Long userId, Product product) {
-        return Optional.ofNullable(userRepository.findById(userId))
-                .map(user -> {
-                    Cart cart = user.getCart();
-                    if (cart != null) {
-                        cart.getProducts().remove(product);
-                        cartRepository.persist(cart);
-                    }
-                    return user.getCart();
-                })
-                .orElse(null);
-    }
-
-    public static BigDecimal calculateTotalCartValue(Long userId) {
-        User user = userRepository.findById(userId);
-        if (user != null) {
-            Cart cart = user.getCart();
-            if (cart != null) {
-                BigDecimal total = BigDecimal.ZERO;
-                for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()) {
-                    Product product = entry.getKey();
-                    Integer quantity = entry.getValue();
-                    // Convert the Double price to BigDecimal
-                    BigDecimal productPrice = BigDecimal.valueOf(product.getPrice());
-                    total = total.add(productPrice.multiply(BigDecimal.valueOf(quantity)));
-                }
-                return total;
-            }
+    public BigDecimal calculateTotalCartValue(Cart cart) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            BigDecimal productPrice = BigDecimal.valueOf(product.getPrice());
+            total = total.add(productPrice.multiply(BigDecimal.valueOf(quantity)));
         }
-        return BigDecimal.ZERO;
+        return total;
     }
 
 }

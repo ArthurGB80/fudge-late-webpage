@@ -1,10 +1,12 @@
 package com.fudgelate.controller;
 
 import com.fudgelate.model.Cart;
+import com.fudgelate.model.Order;
 import com.fudgelate.service.CartService;
+import com.fudgelate.service.OrderService;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -20,16 +22,18 @@ import jakarta.ws.rs.core.Response;
 public class CartController {
 
     private final CartService cartService;
+    private final OrderService orderService;
 
     @Inject
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, OrderService orderService) {
         this.cartService = cartService;
+        this.orderService = orderService;
     }
 
     @POST
     @Path("/create")
     public Cart createCart(Cart cart) {
-        return cartService.createCart(cart);
+        return cartService.createCartForUser(cart.getCartid());
     }
 
     @GET
@@ -54,13 +58,32 @@ public class CartController {
         }
     }
 
-    @DELETE
-    @Path("/{id}")
-    public Response deleteCart(@PathParam("id") Long id) {
-        if (cartService.deleteCart(id)) {
-            return Response.ok("Cart deleted successfully").build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+    @POST
+    @Path("/create")
+    public Response createOrder(Long userId) {
+        try {
+            Order order = orderService.createOrder(userId);
+            if (order != null) {
+                // Process payment
+                boolean paymentSuccessful = orderService.processPayment(order);
+                if (paymentSuccessful) {
+                    // Update order status to "COMPLETED"
+                    orderService.updateOrderStatus(order.getId(), "COMPLETED");
+                    // Send confirmation email
+                    orderService.sendConfirmationEmail(order);
+                    return Response.ok(order).build();
+                } else {
+                    // Update order status to "FAILED"
+                    orderService.updateOrderStatus(order.getId(), "FAILED");
+                    return Response.status(Response.Status.PAYMENT_REQUIRED).entity("Payment failed").build();
+                }
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).entity("Order could not be created").build();
+            }
+        } catch (Exception e) {
+            // Handle exceptions and return appropriate response
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("An error occurred while processing the order").build();
         }
     }
 

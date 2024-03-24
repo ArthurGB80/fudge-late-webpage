@@ -1,5 +1,6 @@
 package com.fudgelate.model;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -28,6 +29,16 @@ public class Cart {
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
     private Map<Product, Integer> products = new HashMap<>();
+
+    private BigDecimal totalValue;
+
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
+    }
+
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
 
 
     public Cart() {
